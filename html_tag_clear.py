@@ -1,7 +1,6 @@
 import os
 import re
 
-
 def remove_strings(filename):
     with open(filename, "r", encoding="utf-8") as f:
         content = f.read()
@@ -12,7 +11,6 @@ def remove_strings(filename):
     )
     with open(filename, "w", encoding="utf-8") as f:
         f.write(content)
-
 
 files = [f for f in os.listdir(".") if os.path.isfile(f) and f.endswith(".txt")]
 
