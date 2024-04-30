@@ -5,4 +5,5 @@ cargo install-update -a
 cargo cache -a
 gem update
 gem cleanup
+npm outdated -g
 npm update -g
