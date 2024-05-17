@@ -1,6 +1,6 @@
 scoop update -a
 scoop cleanup -a
-rustup update
+rustup update stable
 cargo install-update -a
 cargo cache -a
 gem update
