@@ -1,5 +1,3 @@
-$ErrorActionPreference = "Stop"
-
 Write-Host "==> Updating scoop package..." -ForegroundColor Cyan
 scoop update -a
 scoop cleanup -a
