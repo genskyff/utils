@@ -26,7 +26,7 @@ function processContent(content: string) {
     .join("\n");
 }
 
-async function processFiles({ type, dir, recursive }: Options) {
+async function run({ type, dir, recursive }: Options) {
   try {
     const files = walk(dir, {
       exts: [type],
@@ -47,10 +47,6 @@ async function processFiles({ type, dir, recursive }: Options) {
   } catch (error) {
     console.error("An error occurred:", error);
   }
-}
-
-function run(options: Options) {
-  processFiles(options);
 }
 
 if (import.meta.main) {
