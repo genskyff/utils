@@ -5,6 +5,12 @@ import { parseArgs } from "@std/cli";
 import { walk } from "@std/fs/walk";
 import { checkFlags } from "@lib";
 
+interface Options {
+  type: string;
+  dir: string;
+  recursive: boolean;
+}
+
 function removeTag(fragment: string): string {
   const dom = new JSDOM(fragment);
   return dom.window.document.body.textContent || "";
@@ -20,13 +26,7 @@ function processContent(content: string) {
     .join("\n");
 }
 
-interface ProcessFilesOptions {
-  type: string;
-  dir: string;
-  recursive: boolean;
-}
-
-async function processFiles({ type, dir, recursive }: ProcessFilesOptions) {
+async function processFiles({ type, dir, recursive }: Options) {
   try {
     const files = walk(dir, {
       exts: [type],
@@ -49,27 +49,33 @@ async function processFiles({ type, dir, recursive }: ProcessFilesOptions) {
   }
 }
 
-const flags = parseArgs(Deno.args, {
-  string: ["t", "d"],
-  boolean: ["r", "h"],
-  default: { t: "html", d: "." },
-});
-
-const result = checkFlags(flags);
-if (result.hasError) {
-  result.messages.forEach((message) => console.error(message));
-  Deno.exit(1);
+function run(options: Options) {
+  processFiles(options);
 }
 
-if (flags.h) {
-  console.log("Usage: remove_html_tag [OPTIONS]");
-  console.log("Remove HTML tags from files in a directory");
-  console.log("");
-  console.log("Options:");
-  console.log("  -t <type>  The file type to process (default: html)");
-  console.log("  -d <dir>   The directory to process (default: .)");
-  console.log("  -r         Process files recursively");
-  console.log("  -h         Show this help message");
-} else {
-  processFiles({ type: flags.t, dir: flags.d, recursive: flags.r });
+if (import.meta.main) {
+  const flags = parseArgs(Deno.args, {
+    string: ["t", "d"],
+    boolean: ["r", "h"],
+    default: { t: "html", d: "." },
+  });
+
+  const result = checkFlags(flags);
+  if (result.hasError) {
+    result.messages.forEach((message) => console.error(message));
+    Deno.exit(1);
+  }
+
+  if (flags.h) {
+    console.log("Usage: remove_html_tag [OPTIONS]");
+    console.log("Remove HTML tags from files in a directory");
+    console.log("");
+    console.log("Options:");
+    console.log("  -t <type>  The file type to process (default: html)");
+    console.log("  -d <dir>   The directory to process (default: .)");
+    console.log("  -r         Process files recursively");
+    console.log("  -h         Show this help message");
+  } else {
+    run({ type: flags.t, dir: flags.d, recursive: flags.r });
+  }
 }
