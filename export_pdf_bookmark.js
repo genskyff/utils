@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-var no-inner-declarations
 function printBookmarks(bookmarkList, level) {
   level = level || 0;
   var indent = Array(level + 1).join("  ");
