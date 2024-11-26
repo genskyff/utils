@@ -57,7 +57,7 @@ if (import.meta.main) {
   });
 
   const result = checkFlags(flags);
-  if (result.hasError) {
+  if (result.error) {
     result.messages.forEach((message) => console.error(message));
     Deno.exit(1);
   }
