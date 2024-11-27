@@ -2,6 +2,8 @@ import { detectFile } from "chardet";
 import { parseArgs } from "@std/cli";
 import { walk } from "@std/fs/walk";
 import { checkArgs } from "@lib";
+import iconv from "iconv-lite";
+import Table from "cli-table3";
 
 interface Options {
   dir: string;
@@ -10,29 +12,26 @@ interface Options {
   include: boolean;
 }
 
-interface OkFile {
-  path: string;
-  encoding: string;
-}
-
-interface ErrFile {
-  path: string;
-}
-
 async function detectFileEncoding(path: string) {
   const encoding = await detectFile(path);
   return encoding;
 }
 
-async function convertToGB18030(filePath: string, fileEncoding: string) {
+async function convertToGB18030(path: string, encoding: string) {
   try {
-    const content = await Deno.readTextFile(filePath);
-    const encoder = new TextEncoder();
-    const decoder = new TextDecoder(fileEncoding);
+    const bytes = await Deno.readFile(path);
 
-    await Deno.writeTextFile(filePath, content);
+    if (!iconv.encodingExists(encoding)) {
+      throw new Error(`Unsupported encoding: ${encoding}`);
+    }
+
+    const content = iconv.decode(bytes, encoding);
+    const buffer = iconv.encode(content, "GB18030");
+    const newPath = path.replace(/\.txt$/, "_GB18030.txt");
+
+    await Deno.writeFile(newPath, buffer);
   } catch (error) {
-    console.error(`Error converting ${filePath} to GB18030:`, error);
+    console.error(`Error converting ${path} to GB18030:`, error);
   }
 }
 
@@ -43,14 +42,21 @@ async function run({ dir, recursive, transform, include }: Options) {
       maxDepth: recursive ? Infinity : 1,
     });
 
-    const okList: OkFile[] = [];
-    const errList: ErrFile[] = [];
+    const okTable = new Table({
+      head: ["File", "Encoding"],
+    });
+    const errTable = new Table({
+      head: ["File"],
+    });
+    const convertedTable = new Table({
+      head: ["File", "Old Encoding"],
+    });
 
     for await (const file of files) {
       const encoding = await detectFileEncoding(file.path);
 
       if (!encoding) {
-        errList.push({ path: file.path });
+        errTable.push([file.path]);
         continue;
       }
 
@@ -58,24 +64,31 @@ async function run({ dir, recursive, transform, include }: Options) {
         continue;
       }
 
-      okList.push({ path: file.path, encoding });
+      okTable.push([file.path, encoding]);
     }
 
-    if (okList.length === 0) {
-      console.log("No files to process.");
+    if (okTable.length === 0) {
+      console.log("No files to detect.");
     } else {
-      console.log("Files to process:");
-      okList.forEach((file) => {
-        if (transform) {
-          convertToGB18030(file.path, file.encoding);
+      console.log("Files detected:");
+      okTable.forEach((row) => {
+        const [path, encoding] = row as [string, string];
+        if (transform && encoding !== "GB18030") {
+          convertToGB18030(path, encoding);
+          convertedTable.push([path, encoding]);
         }
-        console.log(`- ${file.path} (${file.encoding})`);
       });
+      console.log(okTable.toString());
     }
 
-    if (errList.length > 0) {
-      console.log("Files with errors:");
-      errList.forEach((file) => console.log(`- ${file.path}`));
+    if (errTable.length > 0) {
+      console.log("\nFiles with unknown encoding:");
+      console.log(errTable.toString());
+    }
+
+    if (convertedTable.length > 0) {
+      console.log("\nFiles converted to GB18030:");
+      console.log(convertedTable.toString());
     }
   } catch (error) {
     console.error("An error occurred:", error);
@@ -98,7 +111,7 @@ if (import.meta.main) {
   if (args.h) {
     console.log("Usage: detect_text_encoding [OPTIONS]");
     console.log(
-      "Detect and optionally transform text file encodings to GB18030"
+      "Detect and optionally transform text file encodings to GB18030",
     );
     console.log("");
     console.log("Options:");
