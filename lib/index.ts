@@ -1,1 +1,1 @@
-export * from "./check_flags.ts";
+export * from "./check_args.ts";

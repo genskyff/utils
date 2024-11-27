@@ -3,7 +3,7 @@ import { JSDOM } from "npm:jsdom";
 import { extname } from "@std/path";
 import { parseArgs } from "@std/cli";
 import { walk } from "@std/fs/walk";
-import { checkFlags } from "@lib";
+import { checkArgs } from "@lib";
 
 interface Options {
   type: string;
@@ -50,19 +50,19 @@ async function run({ type, dir, recursive }: Options) {
 }
 
 if (import.meta.main) {
-  const flags = parseArgs(Deno.args, {
+  const args = parseArgs(Deno.args, {
     string: ["t", "d"],
     boolean: ["r", "h"],
     default: { t: "html", d: "." },
   });
 
-  const result = checkFlags(flags);
+  const result = checkArgs(args);
   if (result.error) {
     result.messages.forEach((message) => console.error(message));
     Deno.exit(1);
   }
 
-  if (flags.h) {
+  if (args.h) {
     console.log("Usage: remove_html_tag [OPTIONS]");
     console.log("Remove HTML tags from files in a directory");
     console.log("");
@@ -72,6 +72,6 @@ if (import.meta.main) {
     console.log("  -r         Process files recursively");
     console.log("  -h         Show this help message");
   } else {
-    run({ type: flags.t, dir: flags.d, recursive: flags.r });
+    run({ type: args.t, dir: args.d, recursive: args.r });
   }
 }

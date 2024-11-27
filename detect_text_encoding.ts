@@ -1,7 +1,7 @@
 import { detectFile } from "chardet";
 import { parseArgs } from "@std/cli";
 import { walk } from "@std/fs/walk";
-import { checkFlags } from "@lib";
+import { checkArgs } from "@lib";
 
 interface Options {
   dir: string;
@@ -83,19 +83,19 @@ async function run({ dir, recursive, transform, include }: Options) {
 }
 
 if (import.meta.main) {
-  const flags = parseArgs(Deno.args, {
+  const args = parseArgs(Deno.args, {
     string: ["d"],
     boolean: ["r", "t", "i", "h"],
     default: { d: "." },
   });
 
-  const result = checkFlags(flags);
+  const result = checkArgs(args);
   if (result.error) {
     result.messages.forEach((message) => console.error(message));
     Deno.exit(1);
   }
 
-  if (flags.h) {
+  if (args.h) {
     console.log("Usage: detect_text_encoding [OPTIONS]");
     console.log(
       "Detect and optionally transform text file encodings to GB18030"
@@ -109,10 +109,10 @@ if (import.meta.main) {
     console.log("  -h         Show this help message");
   } else {
     run({
-      dir: flags.d,
-      recursive: flags.r,
-      transform: flags.t,
-      include: flags.i,
+      dir: args.d,
+      recursive: args.r,
+      transform: args.t,
+      include: args.i,
     });
   }
 }
