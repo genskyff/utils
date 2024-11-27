@@ -4,11 +4,17 @@ import { extname } from "@std/path";
 import { parseArgs } from "@std/cli";
 import { walk } from "@std/fs/walk";
 import { checkArgs } from "@lib";
+import Table from "cli-table3";
 
 interface Options {
   type: string;
   dir: string;
   recursive: boolean;
+}
+
+interface ProcessedFile {
+  path: string;
+  newPath: string;
 }
 
 function removeTag(fragment: string): string {
@@ -33,17 +39,23 @@ async function run({ type, dir, recursive }: Options) {
       maxDepth: recursive ? Infinity : 1,
     });
 
+    const processedTable = new Table({
+      head: ["File", "New File"],
+    });
+
     for await (const file of files) {
       const ext = extname(file.name);
       const content = Deno.readTextFileSync(file.path);
       const processedContent = processContent(content);
-      const newPath = file.path.replace(ext, `_fix.txt`);
+      const newPath = file.path.replace(new RegExp(`${ext}$`), "_no_tags.txt");
       await Deno.writeTextFile(newPath, processedContent);
-
-      console.log(`Processed ${file.path} -> ${newPath}`);
+      processedTable.push([file.path, newPath]);
     }
 
-    console.log("All files processed successfully.");
+    if (processedTable.length > 0) {
+      console.log("Files processed:");
+      console.log(processedTable.toString());
+    }
   } catch (error) {
     console.error("An error occurred:", error);
   }
