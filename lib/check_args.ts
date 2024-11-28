@@ -14,12 +14,15 @@ export const checkArgs = (args: Args, options?: Options): Result => {
     error: false,
     messages: [],
   };
+  const pos_args = options?.position || 0;
 
   for (const key in args) {
-    if (key === "_" && args._.length > (options?.position || 0)) {
+    if (key === "_" && args._.length > pos_args) {
       result.error = true;
-      args._.forEach((arg) =>
-        result.messages.push(`Error: Unexpected argument '${arg}'`)
+      args._.forEach(
+        (arg, index) =>
+          index >= pos_args &&
+          result.messages.push(`Error: Unexpected argument '${arg}'`)
       );
     }
 
