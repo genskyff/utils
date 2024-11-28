@@ -12,7 +12,8 @@ async function filterCommits({ pattern, dir }: Options) {
     await $`git -C ${dir} rev-parse --is-inside-work-tree`.quiet();
 
     const gitOutput =
-      await $`git log --all --format="%H%n%an%n%ae%n%ad%n%s%n--COMMIT--"`.text();
+      await $`git log --all --format="%H%n%an%n%ae%n%ad%n%s%n--COMMIT--"`
+        .text();
     const commits = gitOutput
       .split("--COMMIT--")
       .filter((commit) => commit.trim())
@@ -24,7 +25,8 @@ async function filterCommits({ pattern, dir }: Options) {
     const re = new RegExp(pattern, "i");
     const filteredCommits = commits.filter(
       (commit) =>
-        re.test(commit.name) || re.test(commit.email) || re.test(commit.message)
+        re.test(commit.name) || re.test(commit.email) ||
+        re.test(commit.message),
     );
 
     if (filteredCommits.length > 0) {

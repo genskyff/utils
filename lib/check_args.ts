@@ -22,7 +22,7 @@ export const checkArgs = (args: Args, options?: Options): Result => {
       args._.forEach(
         (arg, index) =>
           index >= pos_args &&
-          result.messages.push(`Error: Unexpected argument '${arg}'`)
+          result.messages.push(`Error: Unexpected argument '${arg}'`),
       );
     }
 
