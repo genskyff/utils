@@ -44,12 +44,18 @@ async function run({ dir, recursive, transform, include }: Options) {
 
     const okTable = new Table({
       head: ["File", "Encoding"],
+      colWidths: [70, 10],
+      truncate: "...",
     });
     const errTable = new Table({
       head: ["File"],
+      colWidths: [70],
+      truncate: "...",
     });
     const convertedTable = new Table({
       head: ["File", "Old Encoding"],
+      colWidths: [70, 10],
+      truncate: "...",
     });
 
     for await (const file of files) {

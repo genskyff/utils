@@ -41,6 +41,8 @@ async function run({ type, dir, recursive }: Options) {
 
     const processedTable = new Table({
       head: ["File", "New File"],
+      colWidths: [40, 40],
+      truncate: "...",
     });
 
     for await (const file of files) {
