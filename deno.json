@@ -5,7 +5,7 @@
   "imports": {
     "@david/dax": "jsr:@david/dax@^0.42.0",
     "@lib": "./lib/index.ts",
-    "@std/cli": "jsr:@std/cli@^1.0.7",
+    "@std/cli": "jsr:@std/cli@^1.0.8",
     "@std/encoding": "jsr:@std/encoding@^1.0.5",
     "@std/fs": "jsr:@std/fs@^1.0.6",
     "@std/io": "jsr:@std/io@^0.225.0",
