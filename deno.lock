@@ -9,12 +9,13 @@
     "jsr:@std/async@*": "1.0.9",
     "jsr:@std/bytes@0.221": "0.221.0",
     "jsr:@std/bytes@^1.0.2": "1.0.4",
-    "jsr:@std/cli@^1.0.8": "1.0.8",
-    "jsr:@std/encoding@^1.0.5": "1.0.5",
+    "jsr:@std/cli@^1.0.9": "1.0.9",
+    "jsr:@std/encoding@^1.0.6": "1.0.6",
     "jsr:@std/fmt@1": "1.0.3",
     "jsr:@std/fs@*": "1.0.6",
-    "jsr:@std/fs@1": "1.0.6",
+    "jsr:@std/fs@1": "1.0.8",
     "jsr:@std/fs@^1.0.6": "1.0.6",
+    "jsr:@std/fs@^1.0.8": "1.0.8",
     "jsr:@std/internal@^1.0.5": "1.0.5",
     "jsr:@std/io@0.221": "0.221.0",
     "jsr:@std/io@0.225": "0.225.0",
@@ -69,17 +70,23 @@
     "@std/bytes@1.0.4": {
       "integrity": "11a0debe522707c95c7b7ef89b478c13fb1583a7cfb9a85674cd2cc2e3a28abc"
     },
-    "@std/cli@1.0.8": {
-      "integrity": "3762d8dc9a373715c08d871c38d45e637b25266f013a1d0bbe560bca409de94e"
+    "@std/cli@1.0.9": {
+      "integrity": "557e5865af000efbf3f737dcfea5b8ab86453594f4a9cd8d08c9fa83d8e3f3bc"
     },
-    "@std/encoding@1.0.5": {
-      "integrity": "ecf363d4fc25bd85bd915ff6733a7e79b67e0e7806334af15f4645c569fefc04"
+    "@std/encoding@1.0.6": {
+      "integrity": "ca87122c196e8831737d9547acf001766618e78cd8c33920776c7f5885546069"
     },
     "@std/fmt@1.0.3": {
       "integrity": "97765c16aa32245ff4e2204ecf7d8562496a3cb8592340a80e7e554e0bb9149f"
     },
     "@std/fs@1.0.6": {
       "integrity": "42b56e1e41b75583a21d5a37f6a6a27de9f510bcd36c0c85791d685ca0b85fa2",
+      "dependencies": [
+        "jsr:@std/path@^1.0.8"
+      ]
+    },
+    "@std/fs@1.0.8": {
+      "integrity": "161c721b6f9400b8100a851b6f4061431c538b204bb76c501d02c508995cffe0",
       "dependencies": [
         "jsr:@std/path@^1.0.8"
       ]
@@ -380,9 +387,9 @@
   "workspace": {
     "dependencies": [
       "jsr:@david/dax@0.42",
-      "jsr:@std/cli@^1.0.8",
-      "jsr:@std/encoding@^1.0.5",
-      "jsr:@std/fs@^1.0.6",
+      "jsr:@std/cli@^1.0.9",
+      "jsr:@std/encoding@^1.0.6",
+      "jsr:@std/fs@^1.0.8",
       "jsr:@std/io@0.225",
       "jsr:@std/path@^1.0.8",
       "npm:chardet@2",
