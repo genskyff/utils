@@ -8,17 +8,18 @@
     "jsr:@std/assert@0.221": "0.221.0",
     "jsr:@std/async@*": "1.0.9",
     "jsr:@std/bytes@0.221": "0.221.0",
-    "jsr:@std/bytes@^1.0.2": "1.0.4",
-    "jsr:@std/cli@^1.0.9": "1.0.9",
+    "jsr:@std/bytes@^1.0.4": "1.0.4",
+    "jsr:@std/cli@^1.0.11": "1.0.11",
     "jsr:@std/encoding@^1.0.6": "1.0.6",
     "jsr:@std/fmt@1": "1.0.3",
     "jsr:@std/fs@*": "1.0.6",
-    "jsr:@std/fs@1": "1.0.8",
+    "jsr:@std/fs@1": "1.0.10",
+    "jsr:@std/fs@^1.0.10": "1.0.10",
     "jsr:@std/fs@^1.0.6": "1.0.6",
     "jsr:@std/fs@^1.0.8": "1.0.8",
     "jsr:@std/internal@^1.0.5": "1.0.5",
     "jsr:@std/io@0.221": "0.221.0",
-    "jsr:@std/io@0.225": "0.225.0",
+    "jsr:@std/io@~0.225.1": "0.225.1",
     "jsr:@std/path@1": "1.0.8",
     "jsr:@std/path@^1.0.8": "1.0.8",
     "jsr:@std/streams@0.221": "0.221.0",
@@ -70,8 +71,8 @@
     "@std/bytes@1.0.4": {
       "integrity": "11a0debe522707c95c7b7ef89b478c13fb1583a7cfb9a85674cd2cc2e3a28abc"
     },
-    "@std/cli@1.0.9": {
-      "integrity": "557e5865af000efbf3f737dcfea5b8ab86453594f4a9cd8d08c9fa83d8e3f3bc"
+    "@std/cli@1.0.11": {
+      "integrity": "ec219619fdcd31bcf0d8e53bee1e2706ec9a02f70255365a094f69755dadd340"
     },
     "@std/encoding@1.0.6": {
       "integrity": "ca87122c196e8831737d9547acf001766618e78cd8c33920776c7f5885546069"
@@ -91,6 +92,12 @@
         "jsr:@std/path@^1.0.8"
       ]
     },
+    "@std/fs@1.0.10": {
+      "integrity": "bf041f9d7a0a460817f0421be8946d0e06011b3433e6c83a215628de5e3c7c2c",
+      "dependencies": [
+        "jsr:@std/path@^1.0.8"
+      ]
+    },
     "@std/internal@1.0.5": {
       "integrity": "54a546004f769c1ac9e025abd15a76b6671ddc9687e2313b67376125650dc7ba"
     },
@@ -101,10 +108,10 @@
         "jsr:@std/bytes@0.221"
       ]
     },
-    "@std/io@0.225.0": {
-      "integrity": "c1db7c5e5a231629b32d64b9a53139445b2ca640d828c26bf23e1c55f8c079b3",
+    "@std/io@0.225.1": {
+      "integrity": "0a055fa523288d596f09ba11af5e006f17cecc75bab949b233ceba7eba40293e",
       "dependencies": [
-        "jsr:@std/bytes@^1.0.2"
+        "jsr:@std/bytes@^1.0.4"
       ]
     },
     "@std/path@1.0.8": {
@@ -387,10 +394,10 @@
   "workspace": {
     "dependencies": [
       "jsr:@david/dax@0.42",
-      "jsr:@std/cli@^1.0.9",
+      "jsr:@std/cli@^1.0.11",
       "jsr:@std/encoding@^1.0.6",
-      "jsr:@std/fs@^1.0.8",
-      "jsr:@std/io@0.225",
+      "jsr:@std/fs@^1.0.10",
+      "jsr:@std/io@~0.225.1",
       "jsr:@std/path@^1.0.8",
       "npm:chardet@2",
       "npm:cli-table3@~0.6.5",
