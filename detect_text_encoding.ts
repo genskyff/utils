@@ -8,6 +8,7 @@ import Table from "cli-table3";
 
 interface Options {
   dir: string;
+  ext: string;
   recursive: boolean;
   transform: boolean;
   include: boolean;
@@ -37,26 +38,26 @@ async function convertToGB18030(path: string, encoding: string) {
   }
 }
 
-async function run({ dir, recursive, transform, include }: Options) {
+async function run({ dir, ext, recursive, transform, include }: Options) {
   try {
     const files = walk(dir, {
-      exts: ["txt"],
+      exts: [ext],
       maxDepth: recursive ? Infinity : 1,
     });
 
     const okTable = new Table({
       head: ["File", "Encoding"],
-      colWidths: [70, 10],
+      colWidths: [60, 20],
       truncate: "...",
     });
     const errTable = new Table({
       head: ["File"],
-      colWidths: [70],
+      colWidths: [60],
       truncate: "...",
     });
     const convertedTable = new Table({
       head: ["File", "Old Encoding"],
-      colWidths: [70, 10],
+      colWidths: [60, 20],
       truncate: "...",
     });
 
@@ -105,9 +106,9 @@ async function run({ dir, recursive, transform, include }: Options) {
 
 if (import.meta.main) {
   const args = parseArgs(Deno.args, {
-    string: ["d"],
+    string: ["d", "e"],
     boolean: ["r", "t", "i", "h"],
-    default: { d: "." },
+    default: { d: ".", e: "txt" },
   });
 
   const result = checkArgs(args);
@@ -125,6 +126,7 @@ if (import.meta.main) {
     console.log("");
     console.log("Options:");
     console.log("  -d <dir>   The directory to process (default: .)");
+    console.log("  -e <ext>   The file extension to process (default: txt)");
     console.log("  -r         Process files recursively");
     console.log("  -t         Transform files to GB18030 encoding");
     console.log("  -i         Include files that are already GB18030 encoded");
@@ -132,6 +134,7 @@ if (import.meta.main) {
   } else {
     run({
       dir: args.d,
+      ext: args.e,
       recursive: args.r,
       transform: args.t,
       include: args.i,
