@@ -73,8 +73,9 @@ if (import.meta.main) {
   }
 
   if (args.h) {
-    console.log("Usage: find_keyword_in_commit <PATTERN> [OPTIONS]");
     console.log("Find a keyword in commit messages");
+    console.log("");
+    console.log("Usage: find_keyword_in_commit <PATTERN> [OPTIONS]");
     console.log("");
     console.log("Options:");
     console.log("  -d <dir>   The directory to process (default: .)");

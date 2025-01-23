@@ -115,10 +115,11 @@ if (import.meta.main) {
   }
 
   if (args.h) {
-    console.log("Usage: detect_text_encoding [OPTIONS]");
     console.log(
       "Detect and optionally transform text file encodings to GB18030",
     );
+    console.log("");
+    console.log("Usage: detect_text_encoding [OPTIONS]");
     console.log("");
     console.log("Options:");
     console.log("  -d <dir>   The directory to process (default: .)");

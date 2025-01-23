@@ -77,8 +77,9 @@ if (import.meta.main) {
   }
 
   if (args.h) {
-    console.log("Usage: remove_html_tag [OPTIONS]");
     console.log("Remove HTML tags from files in a directory");
+    console.log("");
+    console.log("Usage: remove_html_tag [OPTIONS]");
     console.log("");
     console.log("Options:");
     console.log("  -t <type>  The file type to process (default: html)");
