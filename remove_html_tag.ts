@@ -46,10 +46,10 @@ async function run({ type, dir, recursive }: Options) {
     });
 
     for await (const file of files) {
-      const ext = extname(file.name);
       const content = Deno.readTextFileSync(file.path);
       const processedContent = processContent(content);
-      const newPath = file.path.replace(new RegExp(`${ext}$`), "_no_tags.txt");
+      const ext = extname(file.name);
+      const newPath = file.path.replace(new RegExp(`${ext}$`), `_no_tags.${ext}`);
       await Deno.writeTextFile(newPath, processedContent);
       processedTable.push([file.path, newPath]);
     }

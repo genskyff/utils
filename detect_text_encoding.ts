@@ -1,4 +1,5 @@
 import { detectFile } from "chardet";
+import { extname } from "@std/path";
 import { parseArgs } from "@std/cli";
 import { walk } from "@std/fs/walk";
 import { checkArgs } from "@lib";
@@ -27,7 +28,8 @@ async function convertToGB18030(path: string, encoding: string) {
 
     const content = iconv.decode(bytes, encoding);
     const buffer = iconv.encode(content, "GB18030");
-    const newPath = path.replace(/\.txt$/, "_GB18030.txt");
+    const ext = extname(path);
+    const newPath = path.replace(new RegExp(`${ext}$`), `_GB18030.${ext}`);
 
     await Deno.writeFile(newPath, buffer);
   } catch (error) {
