@@ -5,6 +5,7 @@ import { walk } from "@std/fs/walk";
 import { checkArgs } from "@lib";
 import iconv from "iconv-lite";
 import Table from "cli-table3";
+import { Buffer } from "node:buffer";
 
 interface Options {
   dir: string;
@@ -21,7 +22,7 @@ async function detectFileEncoding(path: string) {
 
 async function convertToGB18030(path: string, encoding: string) {
   try {
-    const bytes = await Deno.readFile(path);
+    const bytes = await Deno.readFile(path) as Buffer;
 
     if (!iconv.encodingExists(encoding)) {
       throw new Error(`Unsupported encoding: ${encoding}`);
@@ -119,7 +120,7 @@ if (import.meta.main) {
 
   if (args.h) {
     console.log(
-      "Detect and optionally transform text file encodings to GB18030",
+      "Detect and optionally transform text file encodings to GB18030"
     );
     console.log("");
     console.log("Usage: detect_text_encoding [OPTIONS]");
