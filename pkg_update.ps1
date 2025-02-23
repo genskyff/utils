@@ -1,6 +1,6 @@
 Write-Host "==> Updating scoop package..." -ForegroundColor Cyan
 scoop update -a
-scoop cleanup -a
+scoop cleanup --cache --all
 
 Write-Host "==> Updating rust package..." -ForegroundColor Cyan
 rustup update
