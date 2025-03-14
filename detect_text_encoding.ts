@@ -1,28 +1,26 @@
 import { detectFile } from "chardet";
 import { extname } from "@std/path";
-import { parseArgs } from "@std/cli";
 import { walk } from "@std/fs/walk";
-import { checkArgs } from "@lib";
 import iconv from "iconv-lite";
 import Table from "cli-table3";
 import { Buffer } from "node:buffer";
+import { Command } from "@cliffy/command";
 
 interface Options {
-  dir: string;
   ext: string;
   recursive: boolean;
   transform: boolean;
   include: boolean;
 }
 
-async function detectFileEncoding(path: string) {
+const detectFileEncoding = async (path: string) => {
   const encoding = await detectFile(path);
   return encoding;
-}
+};
 
-async function convertToGB18030(path: string, encoding: string) {
+const convertToGB18030 = async (path: string, encoding: string) => {
   try {
-    const bytes = await Deno.readFile(path) as Buffer;
+    const bytes = (await Deno.readFile(path)) as Buffer;
 
     if (!iconv.encodingExists(encoding)) {
       throw new Error(`Unsupported encoding: ${encoding}`);
@@ -37,9 +35,12 @@ async function convertToGB18030(path: string, encoding: string) {
   } catch (error) {
     console.error(`Error converting ${path} to GB18030:`, error);
   }
-}
+};
 
-async function run({ dir, ext, recursive, transform, include }: Options) {
+const run = async (
+  { ext, recursive, transform, include }: Options,
+  dir: string = ".",
+) => {
   try {
     const files = walk(dir, {
       exts: [ext],
@@ -103,42 +104,21 @@ async function run({ dir, ext, recursive, transform, include }: Options) {
   } catch (error) {
     console.error("An error occurred:", error);
   }
-}
+};
 
 if (import.meta.main) {
-  const args = parseArgs(Deno.args, {
-    string: ["d", "e"],
-    boolean: ["r", "t", "i", "h"],
-    default: { d: ".", e: "txt" },
-  });
-
-  const result = checkArgs(args);
-  if (result.error) {
-    result.messages.forEach((message) => console.error(message));
-    Deno.exit(1);
-  }
-
-  if (args.h) {
-    console.log(
-      "Detect and optionally transform text file encodings to GB18030"
-    );
-    console.log("");
-    console.log("Usage: detect_text_encoding [OPTIONS]");
-    console.log("");
-    console.log("Options:");
-    console.log("  -d <dir>   The directory to process (default: .)");
-    console.log("  -e <ext>   The file extension to process (default: txt)");
-    console.log("  -r         Process files recursively");
-    console.log("  -t         Transform files to GB18030 encoding");
-    console.log("  -i         Include files that are already GB18030 encoded");
-    console.log("  -h         Show this help message");
-  } else {
-    run({
-      dir: args.d,
-      ext: args.e,
-      recursive: args.r,
-      transform: args.t,
-      include: args.i,
-    });
-  }
+  await new Command()
+    .name("detect_text_encoding")
+    .description(
+      "Detect and optionally transform text file encodings to GB18030.",
+    )
+    .arguments("[dir]")
+    .option("-e, --ext <ext>", "The file extension to process.", {
+      default: "txt",
+    })
+    .option("-r, --recursive", "Process files recursively.")
+    .option("-t, --transform", "Transform files to GB18030 encoding.")
+    .option("-i, --include", "Include files that are already GB18030 encoded.")
+    .action(run)
+    .parse(Deno.args);
 }
