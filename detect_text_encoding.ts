@@ -1,5 +1,5 @@
 import { detectFile } from "chardet";
-import { extname } from "@std/path";
+import { extname, resolve } from "@std/path";
 import { walk } from "@std/fs/walk";
 import iconv from "iconv-lite";
 import Table from "cli-table3";
@@ -42,7 +42,7 @@ const run = async (
   dir: string = ".",
 ) => {
   try {
-    const files = walk(dir, {
+    const files = walk(resolve(dir), {
       exts: [ext],
       maxDepth: recursive ? Infinity : 1,
     });
