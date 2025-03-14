@@ -42,7 +42,7 @@ const filterCommits = async (pattern: string, dir: string) => {
   }
 };
 
-const run = async (_options = {}, pattern: string, dir = ".") => {
+const run = async (_options: unknown, pattern: string, dir = ".") => {
   try {
     if (pattern) {
       await filterCommits(pattern, resolve(dir));

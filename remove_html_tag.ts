@@ -7,7 +7,7 @@ import Table from "cli-table3";
 
 interface Options {
   ext: string;
-  recursive: boolean;
+  recursive?: boolean;
 }
 
 const removeTag = (fragment: string): string => {

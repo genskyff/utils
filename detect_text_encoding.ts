@@ -8,9 +8,9 @@ import { Command } from "@cliffy/command";
 
 interface Options {
   ext: string;
-  recursive: boolean;
-  transform: boolean;
-  include: boolean;
+  recursive?: boolean;
+  transform?: boolean;
+  include?: boolean;
 }
 
 const detectFileEncoding = async (path: string) => {
