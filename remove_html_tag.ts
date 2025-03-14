@@ -55,7 +55,7 @@ const run = async ({ ext, recursive }: Options, dir = ".") => {
       console.log(processedTable.toString());
     }
   } catch (error) {
-    console.error("An error occurred:", error);
+    console.error("An error occurred:\n", error);
   }
 };
 

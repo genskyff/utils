@@ -33,7 +33,7 @@ const convertToGB18030 = async (path: string, encoding: string) => {
 
     await Deno.writeFile(newPath, buffer);
   } catch (error) {
-    console.error(`Error converting ${path} to GB18030:`, error);
+    console.error(`Error converting ${path} to GB18030:\n`, error);
   }
 };
 
@@ -102,7 +102,7 @@ const run = async (
       console.log(convertedTable.toString());
     }
   } catch (error) {
-    console.error("An error occurred:", error);
+    console.error("An error occurred:\n", error);
   }
 };
 

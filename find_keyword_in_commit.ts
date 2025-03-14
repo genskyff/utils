@@ -37,8 +37,8 @@ const filterCommits = async (pattern: string, dir: string) => {
     } else {
       console.log("No commits found");
     }
-  } catch (_error) {
-    console.error(`Error: ${dir} is not a Git repository`);
+  } catch (error) {
+    console.error("An error occurred:\n", error);
   }
 };
 
