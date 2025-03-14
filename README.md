@@ -23,5 +23,5 @@ deno install
 To run any of the scripts, use the following command:
 
 ```shell
-deno -A run <script_name> [options]
+deno run -A <script_name> [options]
 ```
