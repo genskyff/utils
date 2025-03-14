@@ -1,18 +1,13 @@
 import { $ } from "@david/dax";
-import { parseArgs } from "@std/cli";
-import { checkArgs } from "@lib";
+import { resolve } from "@std/path";
+import { Command } from "@cliffy/command";
 
-interface Options {
-  pattern: string;
-  dir: string;
-}
-
-async function filterCommits({ pattern, dir }: Options) {
+const filterCommits = async (pattern: string, dir: string) => {
   try {
     await $`git -C ${dir} rev-parse --is-inside-work-tree`.quiet();
 
     const gitOutput =
-      await $`git log --all --format="%H%n%an%n%ae%n%ad%n%s%n--COMMIT--"`
+      await $`git -C ${dir} log --all --format="%H%n%an%n%ae%n%ad%n%s%n--COMMIT--"`
         .text();
     const commits = gitOutput
       .split("--COMMIT--")
@@ -45,42 +40,25 @@ async function filterCommits({ pattern, dir }: Options) {
   } catch (_error) {
     console.error(`Error: ${dir} is not a Git repository`);
   }
-}
+};
 
-async function run({ pattern, dir }: Options) {
+const run = async (_options = {}, pattern: string, dir = ".") => {
   try {
     if (pattern) {
-      await filterCommits({ pattern, dir });
+      await filterCommits(pattern, resolve(dir));
     } else {
       console.error("Error: Please provide a pattern to search for");
     }
   } catch (error) {
     console.error("An error occurred:", error);
   }
-}
+};
 
 if (import.meta.main) {
-  const args = parseArgs(Deno.args, {
-    string: ["d"],
-    boolean: ["h"],
-    default: { d: "." },
-  });
-
-  const result = checkArgs(args, { position: 1 });
-  if (result.error) {
-    result.messages.forEach((message) => console.error(message));
-    Deno.exit(1);
-  }
-
-  if (args.h) {
-    console.log("Find a keyword in commit messages");
-    console.log("");
-    console.log("Usage: find_keyword_in_commit <PATTERN> [OPTIONS]");
-    console.log("");
-    console.log("Options:");
-    console.log("  -d <dir>   The directory to process (default: .)");
-    console.log("  -h         Show this help message");
-  } else {
-    run({ pattern: args._[0] as string, dir: args.d });
-  }
+  await new Command()
+    .name("find_keyword_in_commit")
+    .description("Find a keyword in commit messages.")
+    .arguments("<pattern> [dir]")
+    .action(run)
+    .parse(Deno.args);
 }
