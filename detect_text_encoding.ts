@@ -29,7 +29,7 @@ const convertToGB18030 = async (path: string, encoding: string) => {
     const content = iconv.decode(bytes, encoding);
     const buffer = iconv.encode(content, "GB18030");
     const ext = extname(path);
-    const newPath = path.replace(new RegExp(`${ext}$`), `_GB18030.${ext}`);
+    const newPath = path.replace(new RegExp(`${ext}$`), `_GB18030${ext}`);
 
     await Deno.writeFile(newPath, buffer);
   } catch (error) {
@@ -81,7 +81,7 @@ const run = async (
     if (okTable.length === 0) {
       console.log("No files to detect.");
     } else {
-      console.log("Files detected:");
+      !transform && console.log("Files detected:");
       okTable.forEach((row) => {
         const [path, encoding] = row as [string, string];
         if (transform && encoding !== "GB18030") {
@@ -89,7 +89,7 @@ const run = async (
           convertedTable.push([path, encoding]);
         }
       });
-      console.log(okTable.toString());
+      !transform && console.log(okTable.toString());
     }
 
     if (errTable.length > 0) {
