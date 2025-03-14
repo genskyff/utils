@@ -1,28 +1,21 @@
 // @ts-ignore:
 import { JSDOM } from "npm:jsdom";
-import { extname } from "@std/path";
-import { parseArgs } from "@std/cli";
+import { extname, resolve } from "@std/path";
 import { walk } from "@std/fs/walk";
-import { checkArgs } from "@lib";
+import { Command } from "@cliffy/command";
 import Table from "cli-table3";
 
 interface Options {
-  type: string;
-  dir: string;
+  ext: string;
   recursive: boolean;
 }
 
-interface ProcessedFile {
-  path: string;
-  newPath: string;
-}
-
-function removeTag(fragment: string): string {
+const removeTag = (fragment: string): string => {
   const dom = new JSDOM(fragment);
   return dom.window.document.body.textContent || "";
-}
+};
 
-function processContent(content: string) {
+const processContent = (content: string) => {
   const withoutTags = removeTag(content);
 
   return withoutTags
@@ -30,12 +23,12 @@ function processContent(content: string) {
     .filter((line) => line.trim().length > 0)
     .map((line) => line.trim())
     .join("\n");
-}
+};
 
-async function run({ type, dir, recursive }: Options) {
+const run = async ({ ext, recursive }: Options, dir = ".") => {
   try {
-    const files = walk(dir, {
-      exts: [type],
+    const files = walk(resolve(dir), {
+      exts: [ext],
       maxDepth: recursive ? Infinity : 1,
     });
 
@@ -51,7 +44,7 @@ async function run({ type, dir, recursive }: Options) {
       const ext = extname(file.name);
       const newPath = file.path.replace(
         new RegExp(`${ext}$`),
-        `_no_tags.${ext}`,
+        `_no_tags${ext}`,
       );
       await Deno.writeTextFile(newPath, processedContent);
       processedTable.push([file.path, newPath]);
@@ -64,32 +57,17 @@ async function run({ type, dir, recursive }: Options) {
   } catch (error) {
     console.error("An error occurred:", error);
   }
-}
+};
 
 if (import.meta.main) {
-  const args = parseArgs(Deno.args, {
-    string: ["t", "d"],
-    boolean: ["r", "h"],
-    default: { t: "html", d: "." },
-  });
-
-  const result = checkArgs(args);
-  if (result.error) {
-    result.messages.forEach((message) => console.error(message));
-    Deno.exit(1);
-  }
-
-  if (args.h) {
-    console.log("Remove HTML tags from files in a directory");
-    console.log("");
-    console.log("Usage: remove_html_tag [OPTIONS]");
-    console.log("");
-    console.log("Options:");
-    console.log("  -t <type>  The file type to process (default: html)");
-    console.log("  -d <dir>   The directory to process (default: .)");
-    console.log("  -r         Process files recursively");
-    console.log("  -h         Show this help message");
-  } else {
-    run({ type: args.t, dir: args.d, recursive: args.r });
-  }
+  await new Command()
+    .name("remove_html_tag")
+    .description("Remove HTML tags from files in a directory.")
+    .arguments("[dir]")
+    .option("-e, --ext <ext>", "The file extension to process.", {
+      default: "html",
+    })
+    .option("-r, --recursive", "Process files recursively.")
+    .action(run)
+    .parse(Deno.args);
 }
