@@ -9,6 +9,7 @@ import { Command } from "@cliffy/command";
 interface Options {
   ext: string;
   recursive?: boolean;
+  depth?: number;
   transform?: boolean;
   include?: boolean;
 }
@@ -38,13 +39,13 @@ const convertToGB18030 = async (path: string, encoding: string) => {
 };
 
 const run = async (
-  { ext, recursive, transform, include }: Options,
+  { ext, recursive, depth, transform, include }: Options,
   dir: string = ".",
 ) => {
   try {
     const files = walk(resolve(dir), {
       exts: [ext],
-      maxDepth: recursive ? Infinity : 1,
+      maxDepth: recursive ? depth : 1,
     });
 
     const okTable = new Table({
@@ -117,6 +118,10 @@ if (import.meta.main) {
       default: "txt",
     })
     .option("-r, --recursive", "Process files recursively.")
+    .option("--depth <depth:number>", "The maximum depth to process.", {
+      default: Infinity,
+      depends: ["recursive"],
+    })
     .option("-t, --transform", "Transform files to GB18030 encoding.")
     .option("-i, --include", "Include files that are already GB18030 encoded.")
     .action(run)

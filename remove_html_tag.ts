@@ -8,6 +8,7 @@ import Table from "cli-table3";
 interface Options {
   ext: string;
   recursive?: boolean;
+  depth?: number;
 }
 
 const removeTag = (fragment: string): string => {
@@ -25,11 +26,11 @@ const processContent = (content: string) => {
     .join("\n");
 };
 
-const run = async ({ ext, recursive }: Options, dir = ".") => {
+const run = async ({ ext, recursive, depth }: Options, dir = ".") => {
   try {
     const files = walk(resolve(dir), {
       exts: [ext],
-      maxDepth: recursive ? Infinity : 1,
+      maxDepth: recursive ? depth : 1,
     });
 
     const processedTable = new Table({
@@ -68,6 +69,10 @@ if (import.meta.main) {
       default: "html",
     })
     .option("-r, --recursive", "Process files recursively.")
+    .option("--depth <depth:number>", "The maximum depth to process.", {
+      default: Infinity,
+      depends: ["recursive"],
+    })
     .action(run)
     .parse(Deno.args);
 }
