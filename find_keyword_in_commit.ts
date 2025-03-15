@@ -1,6 +1,7 @@
 import { $ } from "@david/dax";
 import { resolve } from "@std/path";
 import { Command } from "@cliffy/command";
+import { colors } from "@cliffy/ansi/colors";
 
 const filterCommits = async (pattern: string, dir: string) => {
   try {
@@ -19,20 +20,22 @@ const filterCommits = async (pattern: string, dir: string) => {
 
     const re = new RegExp(pattern, "i");
     const filteredCommits = commits.filter(
-      (commit) =>
-        re.test(commit.name) || re.test(commit.email) ||
-        re.test(commit.message),
+      (commit) => re.test(commit.message),
     );
 
     if (filteredCommits.length > 0) {
       console.log(`Found ${filteredCommits.length} commits:`);
-      console.log("-".repeat(40));
+      console.log("-".repeat(48));
       for (const commit of filteredCommits) {
         console.log(`Commit: ${commit.hash}`);
         console.log(`Author: ${commit.name} <${commit.email}>`);
         console.log(`Date: ${commit.date}`);
-        console.log(`Message: ${commit.message}`);
-        console.log("-".repeat(40));
+        const highlightedMessage = commit.message.replace(
+          re,
+          (match) => colors.bold.brightGreen(match),
+        );
+        console.log(`Message: ${highlightedMessage}`);
+        console.log("-".repeat(48));
       }
     } else {
       console.log("No commits found");
@@ -44,11 +47,7 @@ const filterCommits = async (pattern: string, dir: string) => {
 
 const run = async (_options: unknown, pattern: string, dir = ".") => {
   try {
-    if (pattern) {
-      await filterCommits(pattern, resolve(dir));
-    } else {
-      console.error("Error: Please provide a pattern to search for");
-    }
+    await filterCommits(pattern, resolve(dir));
   } catch (error) {
     console.error("An error occurred:", error);
   }
