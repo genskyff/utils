@@ -7,10 +7,10 @@
     "@cliffy/command": "jsr:@cliffy/command@^1.0.0-rc.8",
     "@david/dax": "jsr:@david/dax@^0.43.2",
     "@std/fs": "jsr:@std/fs@^1.0.19",
-    "@std/path": "jsr:@std/path@^1.1.1",
+    "@std/path": "jsr:@std/path@^1.1.2",
     "chardet": "npm:chardet@^2.1.0",
     "cli-table3": "npm:cli-table3@^0.6.5",
-    "iconv-lite": "npm:iconv-lite@^0.6.3"
+    "iconv-lite": "npm:iconv-lite@^0.7.0"
   },
   "tasks": {
     "lint:fix": "deno lint --fix && deno fmt"
