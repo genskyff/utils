@@ -2,6 +2,9 @@
   "compilerOptions": {
     "lib": ["dom", "deno.ns"]
   },
+  "tasks": {
+    "lint:fix": "deno lint --fix && deno fmt"
+  },
   "imports": {
     "@cliffy/ansi": "jsr:@cliffy/ansi@^1.0.0-rc.8",
     "@cliffy/command": "jsr:@cliffy/command@^1.0.0-rc.8",
@@ -11,8 +14,5 @@
     "chardet": "npm:chardet@^2.1.0",
     "cli-table3": "npm:cli-table3@^0.6.5",
     "iconv-lite": "npm:iconv-lite@^0.7.0"
-  },
-  "tasks": {
-    "lint:fix": "deno lint --fix && deno fmt"
   }
 }
