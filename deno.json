@@ -11,7 +11,7 @@
     "@david/dax": "jsr:@david/dax@^0.43.2",
     "@std/fs": "jsr:@std/fs@^1.0.19",
     "@std/path": "jsr:@std/path@^1.1.2",
-    "chardet": "npm:chardet@^2.1.0",
+    "chardet": "npm:chardet@^2.1.1",
     "cli-table3": "npm:cli-table3@^0.6.5",
     "iconv-lite": "npm:iconv-lite@^0.7.0"
   }
