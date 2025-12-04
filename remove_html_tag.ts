@@ -1,5 +1,5 @@
 // @ts-ignore:
-import { JSDOM } from "npm:jsdom";
+import { JSDOM } from "jsdom";
 import { extname, resolve } from "@std/path";
 import { walk } from "@std/fs/walk";
 import { Command } from "@cliffy/command";
