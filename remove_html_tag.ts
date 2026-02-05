@@ -1,5 +1,4 @@
-// @ts-ignore:
-import { JSDOM } from "jsdom";
+import { Window } from "happy-dom";
 import { extname, resolve } from "@std/path";
 import { walk } from "@std/fs/walk";
 import { Command } from "@cliffy/command";
@@ -12,8 +11,9 @@ interface Options {
 }
 
 const removeTag = (fragment: string): string => {
-  const dom = new JSDOM(fragment);
-  return dom.window.document.body.textContent || "";
+  const window = new Window();
+  window.document.body.innerHTML = fragment;
+  return window.document.body.textContent || "";
 };
 
 const processContent = (content: string) => {

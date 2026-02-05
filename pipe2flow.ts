@@ -89,7 +89,7 @@ const processSrc = (src: string) => {
         if (needsFlowImport) {
           const importDeclaration = t.importDeclaration(
             [t.importSpecifier(t.identifier("flow"), t.identifier("flow"))],
-            t.stringLiteral("lodash/fp")
+            t.stringLiteral("lodash/fp"),
           );
           const bodyStatements = path.get("body");
           let lastImportIndex = -1;
@@ -134,7 +134,7 @@ const processSrc = (src: string) => {
   const { code } = generate(
     ast,
     { retainLines: true, experimental_preserveFormat: true },
-    src
+    src,
   );
   return [shouldTransform, code];
 };
