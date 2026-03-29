@@ -12,14 +12,14 @@
     }
   },
   "imports": {
-    "@cliffy/ansi": "jsr:@cliffy/ansi@^1.0.0-rc.8",
-    "@cliffy/command": "jsr:@cliffy/command@^1.0.0-rc.8",
-    "@david/dax": "jsr:@david/dax@^0.44.2",
-    "@std/fs": "jsr:@std/fs@^1.0.22",
+    "@cliffy/ansi": "jsr:@cliffy/ansi@^1.0.0",
+    "@cliffy/command": "jsr:@cliffy/command@^1.0.0",
+    "@david/dax": "jsr:@david/dax@^0.45.0",
+    "@std/fs": "jsr:@std/fs@^1.0.23",
     "@std/path": "jsr:@std/path@^1.1.4",
     "chardet": "npm:chardet@^2.1.1",
     "cli-table3": "npm:cli-table3@^0.6.5",
-    "happy-dom": "npm:happy-dom@^20.5.0",
+    "happy-dom": "npm:happy-dom@^20.8.9",
     "iconv-lite": "npm:iconv-lite@^0.7.2"
   }
 }
