@@ -1,28 +1,26 @@
 {
   "version": "5",
   "specifiers": {
-    "jsr:@cliffy/ansi@^1.0.1": "1.0.1",
-    "jsr:@cliffy/command@^1.0.1": "1.0.1",
-    "jsr:@cliffy/flags@1.0.1": "1.0.1",
-    "jsr:@cliffy/internal@1.0.1": "1.0.1",
-    "jsr:@cliffy/table@1.0.1": "1.0.1",
+    "jsr:@cliffy/ansi@^1.1.0": "1.1.0",
+    "jsr:@cliffy/command@^1.1.0": "1.1.0",
+    "jsr:@cliffy/flags@1.1.0": "1.1.0",
+    "jsr:@cliffy/internal@1.1.0": "1.1.0",
+    "jsr:@cliffy/table@1.1.0": "1.1.0",
     "jsr:@david/console-static-text@~0.3.2": "0.3.4",
     "jsr:@david/console-static-text@~0.3.4": "0.3.4",
-    "jsr:@david/dax@0.46": "0.46.0",
+    "jsr:@david/dax@~0.46.1": "0.46.1",
     "jsr:@david/path@0.3": "0.3.2",
     "jsr:@david/path@~0.3.2": "0.3.2",
-    "jsr:@david/shell@~0.3.2": "0.3.2",
+    "jsr:@david/shell@~0.3.3": "0.3.3",
     "jsr:@david/which@0.6": "0.6.0",
     "jsr:@david/which@~0.5.1": "0.5.2",
     "jsr:@std/bytes@^1.0.6": "1.0.6",
     "jsr:@std/encoding@^1.0.10": "1.0.10",
     "jsr:@std/fmt@1": "1.0.10",
     "jsr:@std/fmt@^1.0.9": "1.0.10",
-    "jsr:@std/fs@*": "1.0.23",
     "jsr:@std/fs@^1.0.23": "1.0.23",
     "jsr:@std/internal@^1.0.12": "1.0.13",
     "jsr:@std/io@0.225": "0.225.3",
-    "jsr:@std/path@*": "1.1.4",
     "jsr:@std/path@1": "1.1.4",
     "jsr:@std/path@^1.1.4": "1.1.4",
     "jsr:@std/semver@^1.0.8": "1.0.8",
@@ -38,16 +36,16 @@
     "npm:iconv-lite@~0.7.2": "0.7.2"
   },
   "jsr": {
-    "@cliffy/ansi@1.0.1": {
-      "integrity": "46be51d0993a916dbed68564a6630dc1a742ebb0247744e04bc17e85d72f5bed",
+    "@cliffy/ansi@1.1.0": {
+      "integrity": "f95946660bf07c34017b8eb09240f0ef346a201284be8f1c33f372410f59edf4",
       "dependencies": [
         "jsr:@cliffy/internal",
         "jsr:@std/encoding",
         "jsr:@std/fmt@^1.0.9"
       ]
     },
-    "@cliffy/command@1.0.1": {
-      "integrity": "0172d9c7d8aeb26b8f4f44ffa833247e4fbab707e258ee271e10a2a2f87b531d",
+    "@cliffy/command@1.1.0": {
+      "integrity": "963019e2aa13272195b79256a7d8e0f2c60ba8c1b733e023f0aa241b4de87bf7",
       "dependencies": [
         "jsr:@cliffy/flags",
         "jsr:@cliffy/internal",
@@ -57,18 +55,18 @@
         "jsr:@std/text"
       ]
     },
-    "@cliffy/flags@1.0.1": {
-      "integrity": "468dcf65acb33b51ecb2e232c30603209c528b1d1bd9e065921b57fcb342cb01",
+    "@cliffy/flags@1.1.0": {
+      "integrity": "da161133ea19997d42ae5833226485a8e7598cf82b86d7c1a2ea10e974ecf21c",
       "dependencies": [
         "jsr:@cliffy/internal",
         "jsr:@std/text"
       ]
     },
-    "@cliffy/internal@1.0.1": {
-      "integrity": "9e2bba59ad559b790f09c57219c727a69f0179ebabc07f1bf9db25232b606760"
+    "@cliffy/internal@1.1.0": {
+      "integrity": "433dd7755680d0da6b0a6186694327f6fd8e80807be314cf4bb06270bab28023"
     },
-    "@cliffy/table@1.0.1": {
-      "integrity": "2b1baa3ef9e16ecb7f3fdcf1deb9f5fa5ffa308ea0e68478224a4c2d44d58166",
+    "@cliffy/table@1.1.0": {
+      "integrity": "6579680c9900628ccd0e05272e89ae483391d74a4f1dfe7c55c919e8a7320bcd",
       "dependencies": [
         "jsr:@std/fmt@^1.0.9"
       ]
@@ -76,8 +74,8 @@
     "@david/console-static-text@0.3.4": {
       "integrity": "1c596f500b075ff3c8bab1d328ca7148a88067fd9a506b16a73eeaf230c229fd"
     },
-    "@david/dax@0.46.0": {
-      "integrity": "fd86666a03410fc8ec763b7f9283bb9cfde1c4ade6d529e7522a94bec173d200",
+    "@david/dax@0.46.1": {
+      "integrity": "f0a9df2551b27fd19acbdbda50bb09c90ee81ba9289dd1730a627db94494afa4",
       "dependencies": [
         "jsr:@david/console-static-text@~0.3.2",
         "jsr:@david/path@~0.3.2",
@@ -89,8 +87,8 @@
     "@david/path@0.3.2": {
       "integrity": "f25aaa3de4d3b9edfe25ca5edf15e3014fee7df4f77d64327e5300c27c1a0497"
     },
-    "@david/shell@0.3.2": {
-      "integrity": "5a0137d1591b698f9a4be965ea89316165eec48d9e845afa3ac2e51319abb3f8",
+    "@david/shell@0.3.3": {
+      "integrity": "0a54c57ed215e6d638c821c6c98f07f177b607f0e6e405dde144a602263a0f46",
       "dependencies": [
         "jsr:@david/console-static-text@~0.3.4",
         "jsr:@david/path@0.3",
@@ -333,9 +331,9 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@cliffy/ansi@^1.0.1",
-      "jsr:@cliffy/command@^1.0.1",
-      "jsr:@david/dax@0.46",
+      "jsr:@cliffy/ansi@^1.1.0",
+      "jsr:@cliffy/command@^1.1.0",
+      "jsr:@david/dax@~0.46.1",
       "jsr:@std/fs@^1.0.23",
       "jsr:@std/path@^1.1.4",
       "npm:chardet@^2.1.1",

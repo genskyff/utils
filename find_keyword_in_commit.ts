@@ -1,7 +1,7 @@
+import { colors } from "@cliffy/ansi/colors";
+import { Command } from "@cliffy/command";
 import { $ } from "@david/dax";
 import { resolve } from "@std/path";
-import { Command } from "@cliffy/command";
-import { colors } from "@cliffy/ansi/colors";
 
 const filterCommits = async (pattern: string, dir: string) => {
   try {
@@ -19,9 +19,7 @@ const filterCommits = async (pattern: string, dir: string) => {
       });
 
     const re = new RegExp(pattern, "i");
-    const filteredCommits = commits.filter(
-      (commit) => re.test(commit.message),
-    );
+    const filteredCommits = commits.filter((commit) => re.test(commit.message));
 
     if (filteredCommits.length > 0) {
       console.log(`Found ${filteredCommits.length} commits:`);

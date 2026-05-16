@@ -1,8 +1,8 @@
-import { Window } from "happy-dom";
-import { extname, resolve } from "@std/path";
-import { walk } from "@std/fs/walk";
 import { Command } from "@cliffy/command";
+import { walk } from "@std/fs/walk";
+import { extname, resolve } from "@std/path";
 import Table from "cli-table3";
+import { Window } from "happy-dom";
 
 interface Options {
   ext: string;

@@ -1,7 +1,7 @@
-import { resolve } from "jsr:@std/path";
 import { walk } from "jsr:@std/fs/walk";
-import { parse } from "npm:@babel/parser";
+import { resolve } from "jsr:@std/path";
 import { generate } from "npm:@babel/generator";
+import { parse } from "npm:@babel/parser";
 import traverse from "npm:@babel/traverse";
 import t from "npm:@babel/types";
 
@@ -11,7 +11,7 @@ const CONFIG = {
   dryRun: true,
 };
 
-// @ts-ignore:
+// @ts-expect-error:
 const collectPipelineChain = (path) => {
   let current = path;
 
@@ -33,19 +33,19 @@ const collectPipelineChain = (path) => {
   };
 };
 
-// @ts-ignore:
+// @ts-expect-error:
 const collectNestedPipeline = (expr) => {
   if (!(t.isBinaryExpression(expr) && expr.operator === "|>")) {
     return [expr];
   }
 
-  // @ts-ignore:
+  // @ts-expect-error:
   const leftOperands = collectNestedPipeline(expr.left);
 
   return [...leftOperands, expr.right];
 };
 
-// @ts-ignore:
+// @ts-expect-error:
 const createFlowExpression = ({ operands }) => {
   const initialValue = operands[0];
   const functions = operands.slice(1);
@@ -71,7 +71,7 @@ const processSrc = (src: string) => {
 
   traverse.default(ast, {
     Program: {
-      // @ts-ignore:
+      // @ts-expect-error:
       exit(path) {
         if (path.scope.hasBinding("flow")) {
           const binding = path.scope.getBinding("flow");
@@ -110,7 +110,7 @@ const processSrc = (src: string) => {
     },
 
     BinaryExpression: {
-      // @ts-ignore:
+      // @ts-expect-error:
       exit(path) {
         const { node } = path;
         if (node.operator !== "|>") {

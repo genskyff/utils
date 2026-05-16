@@ -1,10 +1,10 @@
-import { detectFile } from "chardet";
-import { extname, resolve } from "@std/path";
-import { walk } from "@std/fs/walk";
-import iconv from "iconv-lite";
-import Table from "cli-table3";
-import { Buffer } from "node:buffer";
+import type { Buffer } from "node:buffer";
 import { Command } from "@cliffy/command";
+import { walk } from "@std/fs/walk";
+import { extname, resolve } from "@std/path";
+import { detectFile } from "chardet";
+import Table from "cli-table3";
+import iconv from "iconv-lite";
 
 interface Options {
   ext: string;
