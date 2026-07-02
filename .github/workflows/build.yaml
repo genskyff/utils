@@ -1,0 +1,24 @@
+name: Deno
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup Mise
+        uses: jdx/mise-action@v4
+
+      - name: Install packages
+        run: deno install --frozen
+
+      - name: Run tests
+        run: deno run test
