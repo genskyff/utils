@@ -16,9 +16,12 @@
     "jsr:@std/encoding@^1.0.10": "1.0.11",
     "jsr:@std/fmt@1": "1.0.10",
     "jsr:@std/fmt@^1.0.10": "1.0.10",
+    "jsr:@std/fs@*": "1.0.24",
     "jsr:@std/fs@^1.0.24": "1.0.24",
     "jsr:@std/internal@^1.0.14": "1.0.14",
     "jsr:@std/io@0.225": "0.225.3",
+    "jsr:@std/io@~0.225.3": "0.225.3",
+    "jsr:@std/path@*": "1.1.6",
     "jsr:@std/path@1": "1.1.6",
     "jsr:@std/path@^1.1.5": "1.1.6",
     "jsr:@std/path@^1.1.6": "1.1.6",
@@ -40,7 +43,8 @@
       "dependencies": [
         "jsr:@cliffy/internal",
         "jsr:@std/encoding",
-        "jsr:@std/fmt@^1.0.10"
+        "jsr:@std/fmt@^1.0.10",
+        "jsr:@std/io@~0.225.3"
       ]
     },
     "@cliffy/command@1.2.1": {
@@ -93,7 +97,7 @@
         "jsr:@david/path@0.3",
         "jsr:@david/which",
         "jsr:@std/fmt@1",
-        "jsr:@std/io",
+        "jsr:@std/io@0.225",
         "jsr:@std/path@1"
       ]
     },

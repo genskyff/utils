@@ -3,6 +3,7 @@
     "lib": ["dom", "deno.ns"]
   },
   "tasks": {
+    "test": "deno test -A",
     "lint:fix": "deno lint --fix && deno fmt"
   },
   "lint": {
