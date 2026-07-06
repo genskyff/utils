@@ -15,12 +15,12 @@
   "imports": {
     "@cliffy/ansi": "jsr:@cliffy/ansi@^1.2.1",
     "@cliffy/command": "jsr:@cliffy/command@^1.2.1",
-    "@david/dax": "jsr:@david/dax@^0.48.4",
+    "@david/dax": "jsr:@david/dax@^0.48.5",
     "@std/fs": "jsr:@std/fs@^1.0.24",
     "@std/path": "jsr:@std/path@^1.1.6",
     "chardet": "npm:chardet@^2.2.0",
     "cli-table3": "npm:cli-table3@^0.6.5",
     "happy-dom": "npm:happy-dom@^20.10.6",
-    "iconv-lite": "npm:iconv-lite@^0.7.2"
+    "iconv-lite": "npm:iconv-lite@^0.7.3"
   }
 }
