@@ -1,10 +1,10 @@
-name: Deno
+name: CI
 
 on:
-  push:
-    branches: ["**"]
   pull_request:
-    branches: ["**"]
+  push:
+    branches:
+      - "**"
 
 jobs:
   build:
@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup Mise
         uses: jdx/mise-action@v4

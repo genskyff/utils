@@ -15,7 +15,7 @@
   "imports": {
     "@cliffy/ansi": "jsr:@cliffy/ansi@^1.2.1",
     "@cliffy/command": "jsr:@cliffy/command@^1.2.1",
-    "@david/dax": "jsr:@david/dax@^0.48.5",
+    "@david/dax": "jsr:@david/dax@^0.49.0",
     "@std/fs": "jsr:@std/fs@^1.0.24",
     "@std/path": "jsr:@std/path@^1.1.6",
     "chardet": "npm:chardet@^2.2.0",
