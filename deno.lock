@@ -35,7 +35,7 @@
     "npm:@types/node@*": "22.12.0",
     "npm:chardet@^2.2.0": "2.2.0",
     "npm:cli-table3@~0.6.5": "0.6.5",
-    "npm:happy-dom@^20.10.6": "20.10.6",
+    "npm:happy-dom@^20.11.1": "20.11.1",
     "npm:iconv-lite@~0.7.3": "0.7.3"
   },
   "jsr": {
@@ -276,8 +276,8 @@
     "entities@7.0.1": {
       "integrity": "sha512-TWrgLOFUQTH994YUyl1yT4uyavY5nNB5muff+RtWaqNVCAK408b5ZnnbNAUEWLTCpum9w6arT70i1XdQ4UeOPA=="
     },
-    "happy-dom@20.10.6": {
-      "integrity": "sha512-6QD0ilzDDt93tX44y8tbmZdAcdTRYDhUP+Asgi6pC8Pp5IA3cvaZGyoVN/EGtlq9ziT65iPuBBn3ASLr6hCgVw==",
+    "happy-dom@20.11.1": {
+      "integrity": "sha512-XSt8tMzbW9ymE7687xztkO1ckR7qJNQ3LywY9vlYGhGi3zXrGBHuUo2Cl1ztZaICW+1eAGdkLbj6iwVqDT33kg==",
       "dependencies": [
         "@types/node",
         "@types/whatwg-mimetype",
@@ -346,7 +346,7 @@
       "jsr:@std/path@^1.1.6",
       "npm:chardet@^2.2.0",
       "npm:cli-table3@~0.6.5",
-      "npm:happy-dom@^20.10.6",
+      "npm:happy-dom@^20.11.1",
       "npm:iconv-lite@~0.7.3"
     ]
   }
