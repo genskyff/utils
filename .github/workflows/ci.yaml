@@ -6,8 +6,11 @@ on:
     branches:
       - "**"
 
+permissions:
+  contents: read
+
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,5 +23,5 @@ jobs:
       - name: Install packages
         run: deno install --frozen
 
-      - name: Run tests
+      - name: Run test
         run: deno run test
